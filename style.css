@@ -197,11 +197,7 @@ section{
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: url('images/home-img.jpg')no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    object-fit: fill;
+    
 }
 .home .content{
     max-width: 60rem;
