@@ -69,7 +69,7 @@ section{
     display:flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.5em 7%;
+    padding: 1.5rem 7%;
     border-bottom: var(--border);
     position:fixed;
     top:0;left:0;right:0;
@@ -84,6 +84,10 @@ section{
     color:var(--main-color);
     border-bottom: .1rem solid var(--main-color);
     padding-bottom: .5rem;
+}
+.header .logo img{
+    width: 300px;
+    height: 90px;
 }
 .header .icons div{
     color:#000000;
@@ -193,7 +197,7 @@ section{
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background-image: url('feimages/home-img.jpg') no-repeat;
+    background: url(../images/home-img.jpg) no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -485,12 +489,12 @@ section{
 
 
 
-@media (max-width:1000px){
+@media (max-width:991px){
     html{
         font-size: 55%;
     }
     .header{
-        padding: 1.5rem 1rem;
+        padding: 1.5rem 2rem;
     }
     section{
         padding: 2rem;
@@ -516,6 +520,10 @@ section{
         margin: 1.5rem;
         padding: .5rem;
         font-size: 2rem;
+    }
+    .header .logo img {
+        width: 200px; 
+        height: auto; 
     }
     .header.search-form{
         width: 90%;
