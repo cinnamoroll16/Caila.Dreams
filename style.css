@@ -447,6 +447,7 @@ section{
 }
 .footer .share a:hover{
     background-color: var(--bg);
+    color: var(--black);
 }
 .footer .links{
     display: flex;
@@ -462,6 +463,7 @@ section{
     font-size: 2rem;
 }
 .footer .links a:hover{
+    color: var(--black);
     background-color: var(--bg);
 }
 .footer .credit{
