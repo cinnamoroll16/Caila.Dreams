@@ -193,15 +193,24 @@ section{
 
 
 
-.home{
+home {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     object-fit: fill;
+}
+
+.home video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    object-fit: cover;
 }
 .home .content{
     max-width: 60rem;
