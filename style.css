@@ -197,11 +197,7 @@ section{
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: #000; /* Set a fallback background color for older browsers */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    object-fit: fill;
+    background: transparent; /* Remove the background-image property */
 }
 
 .home video {
@@ -213,9 +209,6 @@ section{
     object-fit: cover;
     z-index: -1; /* Ensure the video is behind the content */
 }
-
-/* You can adjust other styles as needed */
-
 .home .content{
     max-width: 60rem;
     opacity: 0.6;
