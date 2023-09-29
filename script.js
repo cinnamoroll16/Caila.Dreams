@@ -41,41 +41,79 @@ function addToCart(e) {
   const itemName = parentBox.querySelector('h3').textContent;
   const itemPrice = parentBox.querySelector('.price').textContent;
 
-  // Create a new cart item element
-  const cartItemDiv = document.createElement('div');
-  cartItemDiv.classList.add('cart-item');
+  // Check if the item is already in the cart
+  const existingCartItem = Array.from(cartItemsContainer.querySelectorAll('.cart-item')).find(item => {
+    return item.querySelector('.content h3').textContent === itemName;
+  });
 
-  const itemImage = document.createElement('img');
-  itemImage.src = imgSrc;
-  itemImage.width = 100;
-  itemImage.height = 100;
-  cartItemDiv.appendChild(itemImage);
+  if (existingCartItem) {
+    // If the item is already in the cart, increment its quantity
+    const quantityInput = existingCartItem.querySelector('.quantity-input');
+    const newQuantity = parseInt(quantityInput.value) + 1;
+    quantityInput.value = newQuantity;
+  } else {
+    // If the item is not in the cart, create a new cart item element
+    const cartItemDiv = document.createElement('div');
+    cartItemDiv.classList.add('cart-item');
 
-  const itemContent = document.createElement('div');
-  itemContent.classList.add('content');
+    const removeIcon = document.createElement('span');
+    removeIcon.classList.add('fas', 'fa-times');
+    removeIcon.addEventListener('click', removeCartItem);
+    cartItemDiv.appendChild(removeIcon);
 
-  const itemNameHeading = document.createElement('h3');
-  itemNameHeading.textContent = itemName;
-  itemContent.appendChild(itemNameHeading);
+    const itemImage = document.createElement('img');
+    itemImage.src = imgSrc;
+    itemImage.width = 100;
+    itemImage.height = 100;
+    cartItemDiv.appendChild(itemImage);
 
-  const itemPriceDiv = document.createElement('div');
-  itemPriceDiv.classList.add('price');
-  itemPriceDiv.textContent = itemPrice;
-  itemContent.appendChild(itemPriceDiv);
+    const itemContent = document.createElement('div');
+    itemContent.classList.add('content');
 
-  cartItemDiv.appendChild(itemContent);
+    const itemNameHeading = document.createElement('h3');
+    itemNameHeading.textContent = itemName;
+    itemContent.appendChild(itemNameHeading);
 
-  // Append the new cart item to the cart items container
-  cartItemsContainer.querySelector('.cart-items').appendChild(cartItemDiv);
+    const itemPriceDiv = document.createElement('div');
+    itemPriceDiv.classList.add('price');
+    itemPriceDiv.textContent = itemPrice;
+    itemContent.appendChild(itemPriceDiv);
 
-  // Update the notification badge
+    const itemQuantity = document.createElement('div');
+    itemQuantity.classList.add('quantity');
+    itemQuantity.innerHTML = `
+      <button class="minus-btn">-</button>
+      <input type="text" class="quantity-input" value="1">
+      <button class="plus-btn">+</button>
+    `;
+    itemContent.appendChild(itemQuantity);
+
+    cartItemDiv.appendChild(itemContent);
+
+    // Append the new cart item to the cart items container
+    cartItemsContainer.querySelector('.cart-items').appendChild(cartItemDiv);
+  }
+
+  // Update the notification badge and total price
+  updateNotificationBadgeCount();
+}
+
+function removeCartItem(e) {
+  const cartItemDiv = e.target.closest('.cart-item');
+  cartItemDiv.remove();
+
+  // Update the notification badge and total price
   updateNotificationBadgeCount();
 }
 
 function updateNotificationBadgeCount() {
-  const cartItemCount = cartItemsContainer.querySelectorAll('.cart-item').length;
+  const cartItemCount = Array.from(cartItemsContainer.querySelectorAll('.cart-item')).reduce((total, cartItem) => {
+    const quantity = parseInt(cartItem.querySelector('.quantity-input').value);
+    return total + quantity;
+  }, 0);
+
   notificationBadge.textContent = cartItemCount;
-  notificationBadge.style.display = 'block';
+  notificationBadge.style.display = cartItemCount > 0 ? 'block' : 'none';
 }
 
 updateQuantityButtons(); // You might need to implement quantity buttons if required
